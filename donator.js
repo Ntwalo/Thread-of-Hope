@@ -14,7 +14,7 @@ const firebaseConfig = {
     messagingSenderId: "929851073222",
     appId: "1:929851073222:web:24dce5402aa63ae22fedc7",
     measurementId: "G-0ZSZCX9N31"
-  };
+};
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -24,65 +24,64 @@ const storage = getStorage(app);
 
 // Form submission handling
 document.getElementById('donatorForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  console.log('Form submitted'); // Debugging log
+    e.preventDefault();
+    console.log('Form submitted'); // Debugging log
 
-  // Get form values
-  const name = document.getElementById('name').value;
-  const email = document.getElementById('email').value;
-  const phone = document.getElementById('phone').value;
-  const address = document.getElementById('address').value;
-  const cloth_type = document.getElementById('cloth_type').value;
-  const size = document.getElementById('size').value;
-  const delivery_type = document.getElementById('delivery_type').value;
-  const drop_pick_date = document.getElementById('drop_pick_date').value;
-  const userFile = document.getElementById('userFile').files[0]; // Get the image file
+    // Get form values
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const address = document.getElementById('address').value;
+    const cloth_type = document.getElementById('cloth_type').value;
+    const size = document.getElementById('size').value;
+    const delivery_type = document.getElementById('delivery_type').value;
+    const drop_pick_date = document.getElementById('drop_pick_date').value;
+    const userFile = document.getElementById('userFile').files[0]; // Get the image file
 
-  // Get the currently logged-in user
-  onAuthStateChanged(auth, async (user) => {
-    console.log('Auth state changed'); // Debugging log
-    if (user) {
-      console.log('User is logged in'); // Debugging log
-      const uid = user.uid;
-      const donationId = `${Date.now()}_${name}`;
+    // Get the currently logged-in user
+    onAuthStateChanged(auth, async (user) => {
+        console.log('Auth state changed'); // Debugging log
+        if (user) {
+            console.log('User is logged in'); // Debugging log
+            const uid = user.uid;
+            const donationId = `${Date.now()}_${name}`;
 
-      try {
-        // Initialize donation data object
-        let donationData = {
-          uid,
-          address,
-          name,
-          email,
-          phone,
-          cloth_type,
-          size,
-          delivery_type,
-          drop_pick_date,
-          timestamp: serverTimestamp()
-        };
+            try {
+                // Initialize donation data object
+                let donationData = {
+                    address,
+                    name,
+                    email,
+                    phone,
+                    cloth_type,
+                    size,
+                    delivery_type,
+                    drop_pick_date,
+                    timestamp: serverTimestamp()
+                };
 
-        // Upload image to Firebase Storage if a file is selected
-        if (userFile) {
-          const imageRef = ref(storage, `donations/${uid}/${donationId}/${userFile.name}`);
-          await uploadBytes(imageRef, userFile);
-          const imageUrl = await getDownloadURL(imageRef);
-          donationData.imageUrl = imageUrl; // Add image URL to donation data
+                // Upload image to Firebase Storage if a file is selected
+                if (userFile) {
+                    const imageRef = ref(storage, `users/${uid}/donations/${donationId}/${userFile.name}`);
+                    await uploadBytes(imageRef, userFile);
+                    const imageUrl = await getDownloadURL(imageRef);
+                    donationData.imageUrl = imageUrl; // Add image URL to donation data
+                }
+
+                // Save donation data to Firestore under the user's donations collection
+                await setDoc(doc(collection(db, `users/${uid}/donations`), donationId), donationData);
+
+                alert('Donation submitted successfully!');
+
+                // Clear form
+                document.getElementById('donatorForm').reset();
+            } catch (error) {
+                console.error("Error submitting donation: ", error);
+                document.getElementById('error').textContent = "Failed to submit donation. Please try again.";
+            }
+        } else {
+            alert("You need to be logged in to submit a donation.");
+            window.location.href = 'index.html'; // Redirect to login page if not logged in
         }
-
-        // Save donation data to Firestore under top-level donations collection
-        await setDoc(doc(collection(db, `donations`), donationId), donationData);
-
-        alert('Donation submitted successfully!');
-
-        // Clear form
-        document.getElementById('donatorForm').reset();
-      } catch (error) {
-        console.error("Error submitting donation: ", error);
-        document.getElementById('error').textContent = "Failed to submit donation. Please try again.";
-      }
-    } else {
-      alert("You need to be logged in to submit a donation.");
-      window.location.href = 'index.html'; // Redirect to login page if not logged in
-    }
-  });
+    });
 });
