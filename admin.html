@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Threads Of Hope</title>
+    <link rel="stylesheet" href="adminStyle.css">
+</head>
+<body>
+    <header>
+        <h1>Admin Dashboard</h1>
+        <button id="logout">Logout</button>
+        <nav class="navigation">
+            <a href="userManagement.html">User Management</a>
+            <a href="userList.html">User List</a>
+            <a href="donationManagement.html">Donation Management</a>
+            <a href="donationList.html">Donation List</a>
+            <a href="receiverManagement.html">Receiver Management</a>
+            <a href="receiverList.html">Receiver List</a>
+        </nav>
+    </header>
+    <main>
+        <section id="home">
+            <h2>Welcome, Admin!</h2>
+            <div class="buttons">
+                <button onclick="window.location.href='userManagement.html'">User Management</button>
+                <button onclick="window.location.href='userList.html'">User List</button>
+                <button onclick="window.location.href='donationManagement.html'">Donation Management</button>
+                <button onclick="window.location.href='donationList.html'">Donation List</button>
+                <button onclick="window.location.href='receiverManagement.html'">Receiver Management</button>
+                <button onclick="window.location.href='receiverList.html'">Receiver List</button>
+            </div>
+        </section>
+    </main>
+    <script src="admin.js" type="module"></script>
+</body>
+</html>

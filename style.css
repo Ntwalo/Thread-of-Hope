@@ -151,3 +151,20 @@ button:hover{
     animation:fadeOut 7s forwards;
 
 }
+#passwordRecovery .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#passwordRecovery .input-group {
+    margin-top: 20px;
+}
+
+#passwordRecovery .links {
+    margin-top: 20px;
+}
+
+#passwordRecovery .btn {
+    margin-top: 20px;
+}

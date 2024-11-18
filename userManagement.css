@@ -1,0 +1,97 @@
+body {
+    font-family: 'Kanit', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #f8f9fa;
+    margin: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+    background-color: #343a40;
+    color: white;
+}
+
+header h1 {
+    font-size: 1.5em;
+    margin: 0;
+}
+
+header .navigation {
+    display: flex;
+    gap: 15px;
+}
+
+header .navigation a {
+    color: #ffc107;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+header .navigation a:hover {
+    text-decoration: underline;
+}
+
+button#logout {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button#logout:hover {
+    background-color: #c82333;
+}
+
+main {
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #343a40;
+}
+
+#usersList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.user-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    background: #f1f1f1;
+}
+
+.user-item button.delete-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.user-item button.delete-button:hover {
+    background-color: #c82333;
+}

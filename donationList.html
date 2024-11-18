@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation List - Admin Dashboard</title>
+    <link rel="stylesheet" href="donationList.css">
+</head>
+<body>
+    <header>
+        <h1>Admin Dashboard - Donation List</h1>
+        <button id="logout">Logout</button>
+        <nav class="navigation">
+            <a href="admin.html">Home</a>
+            <a href="userManagement.html">User Management</a>
+            <a href="userList.html">User List</a>
+            <a href="donationManagement.html">Donation Management</a>
+            <a href="donationList.html">Donation List</a>
+            <a href="receiverManagement.html">Receiver Management</a>
+            <a href="receiverList.html">Receiver List</a>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>All Donations</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Cloth Type</th>
+                        <th>Size</th>
+                        <th>Delivery Type</th>
+                        <th>Drop/Pick Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="donationListTable"></tbody>
+            </table>
+        </section>
+    </main>
+    <script src="donationList.js" type="module"></script>
+</body>
+</html>
